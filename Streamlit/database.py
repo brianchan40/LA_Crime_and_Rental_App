@@ -6,9 +6,15 @@ def query_db():
     
     return crime_data[crime_data['year'] == 2023].copy()
     
+def query_zillow():
+    rental_zipcode = pd.read_csv("../Rental_Data/Zillow/Zip_zori_sm_month.csv")
+    
+    return rental_zipcode[["RegionName", "2023-03-31"]].rename(columns={"RegionName": "neighborhood", "2023-03-31": "zillow_index"}).copy()
+
+
     
     
 if __name__ == '__main__':
     import sys
     
-    print(query_db())
+    print(query_zillow())

@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from database import query_db
+from database import *
 from plot import plot
 from streamlit_folium import st_folium
 
@@ -18,7 +18,7 @@ def app():
     
     #st.write(plot(query_db()))
     
-    st_data = st_folium(plot(query_db()))
+    st_data = st_folium(plot(query_db(), query_zillow(), "0", "0.5", "2200", "2800"))
     
     
     
