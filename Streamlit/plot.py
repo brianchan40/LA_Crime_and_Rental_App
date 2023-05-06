@@ -1,6 +1,7 @@
 import folium
+from database import query_db
 
-def plot():
+def plot(final_df):
     
     bins = list(final_df["Safety_Index"].quantile([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]))
 
@@ -12,7 +13,7 @@ def plot():
         data=final_df,
         columns=["neighborhood", "Safety_Index"],
         key_on="feature.properties.ZIPCODE",
-        fill_color="YlGn",
+        #fill_color="Green",
         fill_opacity=0.7,
         line_opacity=0.2,
         legend_name="Safety Index",
@@ -22,8 +23,9 @@ def plot():
 
     folium.LayerControl().add_to(map_)
 
-    map_
+    return(map_)
     
     
 if __name__ == '__main__':
-    plot()
+    final_df = query_db()
+    plot(final_df)
