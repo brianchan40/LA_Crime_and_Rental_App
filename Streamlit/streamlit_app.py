@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from database import *
-from plot import plot
+from plot import *
 from streamlit_folium import st_folium
 
 def app():
@@ -18,6 +18,8 @@ def app():
     rent_min = st.selectbox("Lower Bound on Rent", rent_options)
     rent_max = st.selectbox("Upper Bound on Rent", rent_options, index=5)
     
+    crime_map = plot_crime_map(query_db())
+    
     #map_data = pd.DataFrame(
         #np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
         #columns=['lat', 'lon'])
@@ -26,7 +28,7 @@ def app():
     
     #st.write(plot(query_db()))
     
-    st_data = st_folium(plot(query_db(), query_zillow(), crime_min, crime_max, rent_min, rent_max))
+    st_data = st_folium(plot(crime_map, query_db(), query_zillow(), crime_min, crime_max, rent_min, rent_max))
     
     
     
