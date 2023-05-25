@@ -50,6 +50,33 @@ def plot_crime_map(final_df):
     folium.LayerControl().add_to(map_in_func)
     
     return map_in_func
+
+
+
+def plot_rent_map(crime_df, zillow_df):
+    
+    map_in_func = folium.Map(location=(34.045015, -118.299997))
+    final_df = pd.merge(crime_df, zillow_df, on='neighborhood')
+    
+    bins_zillow = list(final_df["zillow_index"].quantile([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1]))
+
+    folium.Choropleth(
+        geo_data="../Other_Data/LA_County_ZIP_Codes.geojson",
+        name="choropleth",
+        data=final_df,
+        columns=["neighborhood", "zillow_index"],
+        key_on="feature.properties.ZIPCODE",
+        fill_color="Blues",
+        fill_opacity=0.7,
+        line_opacity=0.2,
+        legend_name="Zillow Index for Rent in USD",
+        bins=bins_zillow,
+        reset=True,
+    ).add_to(map_in_func)
+
+    folium.LayerControl().add_to(map_in_func)
+    
+    return map_in_func
     
     
 if __name__ == '__main__':
