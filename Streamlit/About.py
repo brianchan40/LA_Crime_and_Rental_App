@@ -3,7 +3,7 @@ import streamlit as st
 from database import *
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
-from sklearn.metrics import r2_score
+#from sklearn.metrics import r2_score
 import numpy as np
 import math
 
@@ -37,7 +37,7 @@ ax.scatter(final_df['Safety_Index'], final_df['zillow_index'])
     
 popt, pcov = curve_fit(func, final_df['Safety_Index'], final_df['zillow_index'])
 y_pred = func(final_df['Safety_Index'], *popt)
-r2 = r2_score(final_df['zillow_index'], y_pred)
+#r2 = r2_score(final_df['zillow_index'], y_pred)
 
 xseq = np.linspace(0, 5, num=100)
 ax.plot(xseq, func(xseq, *popt), color="k", lw=2.5)
