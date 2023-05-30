@@ -7,7 +7,7 @@ def plot(map_in_func, crime_df, zillow_df, crime_min, crime_max, rent_min, rent_
     final_df = pd.merge(crime_df, zillow_df, on='neighborhood')
     
     bins_safety = list(final_df["Safety_Index"].quantile([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]))
-    bins_zillow = list(final_df["zillow_index"].quantile([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]))
+    #bins_zillow = list(final_df["zillow_index"].quantile([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]))
     
     dict_convert = {"0":0, "0.1":1, "0.2":2, "0.3":3, "0.4":4, "0.5":5, "0.6":6, "0.7":7, "0.8":8, "0.9":9, "1":10}
     dict_convert_rent_min = {"<1800":0, "2000":2000, "2200":2200, "2400":2400, "2600":2600, "2800":2800, "3000":3000, "3200":3200, "3400":3400, "3600":3600, "3800":3800, ">4000":4000}
